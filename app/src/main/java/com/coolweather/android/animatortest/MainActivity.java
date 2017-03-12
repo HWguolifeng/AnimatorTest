@@ -1,10 +1,11 @@
 package com.coolweather.android.animatortest;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -17,22 +18,22 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //基本用法
-        ValueAnimator animator = ValueAnimator.ofInt(1, 10);
-        //设置时间
-        animator.setDuration(10000);
-        //设置监听器
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-        {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation)
-            {
-                int dest = (int) animation.getAnimatedValue();
-                Log.i(TAG, "onAnimationUpdate: " + dest);
-            }
-        });
+//        //基本用法
+//        ValueAnimator animator = ValueAnimator.ofInt(1, 10);
+//        //设置时间
+//        animator.setDuration(10000);
+//        //设置监听器
+//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
+//        {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator animation)
+//            {
+//                int dest = (int) animation.getAnimatedValue();
+//                Log.i(TAG, "onAnimationUpdate: " + dest);
+//            }
+//        });
         //启动
-        animator.start();
+//        animator.start();
 
         //ObjectAnimator 的简单使用
 
@@ -58,6 +59,23 @@ public class MainActivity extends AppCompatActivity
         animatorSet.play(objectAnimator).with(objectAnimatorRotation).after(objectAnimatorTrans);
         animatorSet.setDuration(10000);
         animatorSet.start();
+        
+        animatorSet.addListener(new AnimatorListenerAdapter()
+        {
+            @Override
+            public void onAnimationEnd(Animator animation)
+            {
+                super.onAnimationEnd(animation);
+                Log.i(TAG, "onAnimationEnd: ");
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation)
+            {
+                super.onAnimationStart(animation);
+                Log.i(TAG, "onAnimationStart: ");
+            }
+        });
 
 
     }
