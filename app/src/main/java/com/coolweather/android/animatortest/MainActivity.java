@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity
         //基本用法
         ValueAnimator animator = ValueAnimator.ofInt(1, 10);
         //设置时间
-        animator.setDuration( 100);
+        animator.setDuration(10000);
         //设置监听器
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
         {
@@ -34,9 +34,24 @@ public class MainActivity extends AppCompatActivity
         animator.start();
 
         //ObjectAnimator 的简单使用
-        TextView textView = (TextView)this.findViewById(R.id.text_view);
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(textView,"alpha",1f,0f,1f);
+
+        //改变text View 的透明度
+        TextView textView = (TextView) this.findViewById(R.id.text_view);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(textView, "alpha", 1f, 0f, 1f);
         objectAnimator.setDuration(5000);
         objectAnimator.start();
+
+        //设置旋转的属性
+        ObjectAnimator objectAnimatorRotation = ObjectAnimator.ofFloat(textView, "rotation", 0f, 360f, 0f);
+        objectAnimatorRotation.setDuration(5000);
+        objectAnimatorRotation.start();
+
+        //平移的属性
+        float translationX = textView.getTranslationX();
+        ObjectAnimator objectAnimatorTrans = ObjectAnimator.ofFloat(textView, "translationX", translationX, -500f, translationX);
+        objectAnimatorTrans.setDuration(10000);
+        objectAnimatorTrans.start();
+
+
     }
 }
