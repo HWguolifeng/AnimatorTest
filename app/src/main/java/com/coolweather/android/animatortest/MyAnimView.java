@@ -1,5 +1,7 @@
 package com.coolweather.android.animatortest;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,12 +20,25 @@ public class MyAnimView extends View
     public static final float RADIUS = 50f;
     private Point currentPoint;
     private Paint mPaint;
+    private String color;
 
     public MyAnimView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.BLUE);
+    }
+
+    public String getColor()
+    {
+        return color;
+    }
+
+    public void setColor(String color)
+    {
+        this.color = color;
+        mPaint.setColor(Color.parseColor(color));
+        invalidate();
     }
 
     @Override
@@ -63,7 +78,16 @@ public class MyAnimView extends View
             }
         });
         anim.setDuration(5000);
-        anim.start();
+//        anim.start();
+
+        ObjectAnimator anim2 = ObjectAnimator.ofObject(this, "color", new ColorEvaluator(),
+                "#0000FF", "#FF0000");
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.play(anim).with(anim2);
+        animSet.setDuration(5000);
+        animSet.start();
+
     }
+
 
 }
