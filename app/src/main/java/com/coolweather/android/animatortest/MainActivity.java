@@ -1,5 +1,6 @@
 package com.coolweather.android.animatortest;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.support.v7.app.AppCompatActivity;
@@ -38,19 +39,25 @@ public class MainActivity extends AppCompatActivity
         //改变text View 的透明度
         TextView textView = (TextView) this.findViewById(R.id.text_view);
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(textView, "alpha", 1f, 0f, 1f);
-        objectAnimator.setDuration(5000);
-        objectAnimator.start();
+//        objectAnimator.setDuration(5000);
+//        objectAnimator.start();
 
         //设置旋转的属性
         ObjectAnimator objectAnimatorRotation = ObjectAnimator.ofFloat(textView, "rotation", 0f, 360f, 0f);
-        objectAnimatorRotation.setDuration(5000);
-        objectAnimatorRotation.start();
+//        objectAnimatorRotation.setDuration(5000);
+//        objectAnimatorRotation.start();
 
         //平移的属性
         float translationX = textView.getTranslationX();
         ObjectAnimator objectAnimatorTrans = ObjectAnimator.ofFloat(textView, "translationX", translationX, -500f, translationX);
-        objectAnimatorTrans.setDuration(10000);
-        objectAnimatorTrans.start();
+//        objectAnimatorTrans.setDuration(10000);
+//        objectAnimatorTrans.start();
+
+        //设置组合动画
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(objectAnimator).with(objectAnimatorRotation).after(objectAnimatorTrans);
+        animatorSet.setDuration(10000);
+        animatorSet.start();
 
 
     }
