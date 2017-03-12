@@ -1,9 +1,11 @@
 package com.coolweather.android.animatortest;
 
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -30,5 +32,11 @@ public class MainActivity extends AppCompatActivity
         });
         //启动
         animator.start();
+
+        //ObjectAnimator 的简单使用
+        TextView textView = (TextView)this.findViewById(R.id.text_view);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(textView,"alpha",1f,0f,1f);
+        objectAnimator.setDuration(5000);
+        objectAnimator.start();
     }
 }
